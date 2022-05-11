@@ -62,8 +62,8 @@ app.post("/resource", async (req ,res) => {
         await client.query(insertContentQuery,insertContentParams)
         
         
-        res.sendStatus(200).json('')
-        return
+        res.status(200).json('New resource successfully added to studyResourcedb ')
+        
     } catch (err) {
         console.log(`error:${err.message}`)
         res.sendStatus(500)

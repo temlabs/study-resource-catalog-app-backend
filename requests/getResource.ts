@@ -11,14 +11,16 @@ const dbConfig = {
 const app = express();
 const client = new Client(dbConfig);
 
-
+//Get all resources listed in the table
 app.get("/resources", async (req, res) => {
     try{
-    const query = "SELECT * FROM resource ORDER BY post_date  DESC;"
-    const dbres = await client.query(query);
-    res.json(dbres.rows);
-    res.status(200)
-    }catch(error){
-        res.status(400).send(error.stack)
-    }
+        const query = `SELECT * FROM resource ORDER BY post_date  DESC;`
+        const dbres = await client.query(query);
+        res.json(dbres.rows);
+        res.status(200)
+        }
+        catch(error)
+        {
+            res.status(400).send(error.stack)
+        }
   });

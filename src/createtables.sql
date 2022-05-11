@@ -18,7 +18,7 @@ CREATE TABLE resource (
 	author_name varchar(255),
 	url text UNIQUE,
 	description varchar(255),
-	post_date timestamp,
+	post_date timestamp DEFAULT current_timestamp,
 	build_stage varchar(255),
 	recommendation_nature varchar(255),
 	recommendation_reason varchar(255), 

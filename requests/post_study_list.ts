@@ -29,7 +29,7 @@ app.post("/studylist", async (req, res) => {
       const addToStudyList = await client.query(
         insertStudyList, [user_id, resource_id]
       );
-      res.json(insertStudyList.rows)
+      res.json(addToStudyList.rows)
     } catch (error) {
       console.error();
       res.sendStatus(500);

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My server API</title>
+</head>
+
+<body>
+    <header>
+        <h1>My server API</h1>
+        <h2>RESTful JSON API</h2>
+    </header>
+    <main>
+        <section>
+            <h3><strong>GET Requests</strong></h3>
+            <section>
+                <ul>
+                <li>Retrieve resources sorted by post date in descending order</li>
+                <p><code>GET /resources </code></p>
+                <li>Gets all users</li>
+                <p><code>GET /users </code></p>
+                <li>Gets comments for a given resource</li>
+                <p><code>GET /comments/:resource_id </code></p>
+                <li>Gets all reactions for a given resource</li>
+                <p><code>GET /reactions </code></p>
+                <li>Gets all content-types</li>
+                <p><code>GET /content-types </code></p>
+                <li>*Gets all study tips for a specific users</li>
+                <p><code>GET /study-list/:user_id </code></p>
+            </ul>
+            </section>       
+        </section>
+        <section>
+            <h3><strong>POST Requests</strong></h3>
+            <section>
+                <ul>
+                <li>Adds resource to a database</li>
+                <p><code>POST /resources </code></p>
+                <li>*Post comments for a particular resource</li>
+                <p><code>POST /comments </code></p>
+                <li>*Post a reaction for a given resource</li>
+                <p><code>POST /reactions/:resource_id</code></p>
+                <li>*Post a reactions for a given resource</li>
+                <p><code>POST /reactions/:resource_id </code></p>
+                <li>*Post a resource to study list for a specific users</li>
+                <p><code>GET /study-list </code></p>
+            </ul>
+            </section>       
+        </section>
+    </main>
+</body>
+
+</html>

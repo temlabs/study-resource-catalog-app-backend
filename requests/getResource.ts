@@ -8,15 +8,16 @@ const dbConfig = {
   ssl: sslSetting,
 };
 
-const app = express();
+//const app = express();
+const router= express.Router();
 const client = new Client(dbConfig);
 
 //Get all resources listed in the table
-app.get("/resources", async (req, res) => {
+router.get("/resources", async (req, res) => {
     try{
         const query = `SELECT * FROM resource ORDER BY post_date  DESC;`
-        const dbres = await client.query(query);
-        res.json(dbres.rows);
+        const resources = await client.query(query);
+        res.json(resources.rows);
         res.status(200)
         }
         catch(error)
@@ -24,3 +25,4 @@ app.get("/resources", async (req, res) => {
             res.status(400).send(error.stack)
         }
   });
+  export default router;

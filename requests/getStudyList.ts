@@ -25,7 +25,7 @@ app.get<{id: string},{},{}>("/study-list/:id", async (req, res) => {
 
         //checking to see if the result of the query is empty
         if (studyList.rowCount  === 0){
-            res.send(400).send("Thsi user does not exist")
+            res.send(400).send("This user does not exist")
         }else {
             res.status(201).send(studyList.rows)
         };

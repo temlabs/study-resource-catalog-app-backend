@@ -19,7 +19,7 @@ client.connect();
 
 //this defines the SQL query inside a POST HTTP request
 
-app.post("/", async (req, res) => {
+app.post("/reaction", async (req, res) => {
     try {
       const insertReaction = "INSERT INTO reaction (resource_id, user_id, polarity) VALUES	($1, $2, $3) returning *"
       const {resource_id, user_id, polarity} = req.body

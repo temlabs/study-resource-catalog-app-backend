@@ -19,7 +19,7 @@ client.connect();
 
 //this defines the SQL query inside a GET HTTP request
 
-    app.get("/", async (req, res) => {
+    app.get("/users", async (req, res) => {
         const dbres = await 
         client.query("SELECT user_name, is_faculty FROM user_list ORDER BY is_faculty DESC, user_name");
     res.json(dbres.rows);

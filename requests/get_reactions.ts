@@ -19,11 +19,11 @@ client.connect();
 
 //this defines the SQL query inside a GET HTTP request
 
-app.get("/", async (req, res) => {
+app.get("reaction/:resource_id", async (req, res) => {
   try {
     const getReaction = "SELECT reaction.resource_id, SUM(reaction.polarity) FROM reaction WHERE reaction.resource_id = ($1) GROUP BY reaction.resource_id"
-    const {resource_id} = req.body
-    console.log('req.body', req.body);
+    const {resource_id} = req.params
+    console.log('req.body', req.params);
     console.log('resource_id', resource_id);
     const returnReaction = await client.query(
       getReaction, [resource_id]

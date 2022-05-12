@@ -9,13 +9,13 @@ import filePath from "./src/filePath";
 import getResource from './requests/getResource';
 import getStudyList from './requests/getStudyList';
 //import getComments from './requests/getComments';
-import getContentType from './requests/getContentType';
-import getReactions from './requests/getReactions';
-import getUsers from './requests/getUsers'
+ import getContentType from './requests/getContentType';
+// import getReactions from './requests/getReactions';
+// import getUsers from './requests/getUsers'
 //import postComment from "./requests/postComment";
-import postReactionsWritten from './requests/postReactionsWritten'
-import postResource from './requests/postResource'
-import postStudyList from './requests/postStudyList'
+// import postReactionsWritten from './requests/postReactionsWritten'
+// import postResource from './requests/postResource'
+// import postStudyList from './requests/postStudyList'
 
 
 
@@ -42,12 +42,12 @@ app.use('/', getResource);
 app.use('/', getStudyList);
 //app.use('/', getComments);
 app.use('/', getContentType);
-app.use('/', getReactions);
-app.use('/', getUsers);
-//app.use('/', postComment);
-app.use('/', postReactionsWritten);
-app.use('/', postResource);
-app.use('/', postStudyList);
+// app.use('/', getReactions);
+// app.use('/', getUsers);
+// //app.use('/', postComment);
+// app.use('/', postReactionsWritten);
+// app.use('/', postResource);
+// app.use('/', postStudyList);
 
 
 
@@ -65,47 +65,47 @@ app.get("/", async (req, res) => {
 });
 
 
-app.get<{ resourceId: number }, {}, {}>("/comments/:resourceId", async (req, res) => {
-  const resourceId = req.params.resourceId;
-  if (!resourceId) {
-    res.sendStatus(400)
-    return;
-  }
+// app.get<{ resourceId: number }, {}, {}>("/comments/:resourceId", async (req, res) => {
+//   const resourceId = req.params.resourceId;
+//   if (!resourceId) {
+//     res.sendStatus(400)
+//     return;
+//   }
 
-  try {
-    const comments: Comment[] = await getComments(client, resourceId);
-    if (comments.length == 0) {
-      res.sendStatus(404);
-      return;
-    }
-    res.status(200).json(comments);
+//   try {
+//     const comments: Comment[] = await getComments(client, resourceId);
+//     if (comments.length == 0) {
+//       res.sendStatus(404);
+//       return;
+//     }
+//     res.status(200).json(comments);
 
-  } catch (error) {
-    res.sendStatus(500);
-    return;
-  }
-});
+//   } catch (error) {
+//     res.sendStatus(500);
+//     return;
+//   }
+// });
 
-app.post<{}, {}, CommentPost>("/comments", async (req, res) => {
-  const { resource_id, comment_text, user_id }: { resource_id: number, comment_text: string, user_id: number } = req.body
-  const commentIsEmpty = comment_text === "";
-  if (commentIsEmpty || !resource_id || !user_id || !comment_text) {
-    res.sendStatus(400)
-    return;
-  }
+// app.post<{}, {}, CommentPost>("/comments", async (req, res) => {
+//   const { resource_id, comment_text, user_id }: { resource_id: number, comment_text: string, user_id: number } = req.body
+//   const commentIsEmpty = comment_text === "";
+//   if (commentIsEmpty || !resource_id || !user_id || !comment_text) {
+//     res.sendStatus(400)
+//     return;
+//   }
 
-  try {
-    const postedComment: Comment[] = await postComment(client, comment_text, resource_id, user_id);
-    res.status(201).json(postedComment);
-  } catch (error) {
-    if ((error.detail as string).includes("not present")) {
-      res.status(500).json("A resource id or user id was not present in the database");
-      return;
-    }
-    res.sendStatus(500);
-    return;
-  }
-});
+//   try {
+//     const postedComment: Comment[] = await postComment(client, comment_text, resource_id, user_id);
+//     res.status(201).json(postedComment);
+//   } catch (error) {
+//     if ((error.detail as string).includes("not present")) {
+//       res.status(500).json("A resource id or user id was not present in the database");
+//       return;
+//     }
+//     res.sendStatus(500);
+//     return;
+//   }
+// });
 
 
 

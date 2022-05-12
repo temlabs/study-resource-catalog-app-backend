@@ -10,7 +10,7 @@ router.get("/content-type", async (req, res) => {
     res.json(data.rows);
   } catch (error) {
     console.error(error)
-    res.sendStatus(500);
+    res.status(500).json(error.message);
   }
 });
 

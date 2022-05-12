@@ -14,7 +14,7 @@ router.get("/resources",  async function (req, res) {
         }
         catch(error)
         {
-            res.status(400).send(error.stack)
+            res.status(500).json(error.message);
         }
   });
   

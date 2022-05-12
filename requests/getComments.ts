@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 export async function getComments(client: Client, resourceId: number): Promise<Comment[]> {
-    const getCommentsQuery = 'SELECT * from comment_list WHERE resource_id = $1';
+    const getCommentsQuery = 'SELECT * from comment_list JOIN user_list ON comment_list.user_id = user_list.user_id WHERE resource_id = $1';
     const getCommentsQueryParams = [resourceId];
     let dbRes;
     dbRes = await client.query(getCommentsQuery, getCommentsQueryParams);
@@ -33,8 +33,7 @@ router.get<{ resourceId: number }, {}, {}>("/comments/:resourceId", async (req, 
         res.status(200).json(comments);
 
     } catch (error) {
-        res.sendStatus(500);
-        return;
+        res.status(500).json(error.message);
     }
 });
 

@@ -25,7 +25,7 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
 
   } catch (err) {
     console.log(`error:${err.message}`)
-    res.sendStatus(500)
+    res.status(500).json(err.message);
 
   }
 

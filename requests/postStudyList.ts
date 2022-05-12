@@ -19,8 +19,7 @@ router.post("/studylist", async (req, res) => {
     );
     res.json(addToStudyList.rows)
   } catch (error) {
-    console.error();
-    res.sendStatus(500);
+    res.status(500).json(error.message);
   }
 });
 

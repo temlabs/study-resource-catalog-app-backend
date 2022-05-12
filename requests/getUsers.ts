@@ -8,9 +8,14 @@ const router = express.Router();
 //this defines the SQL query inside a GET HTTP request
 
 router.get("/users", async (req, res) => {
-  const dbres = await
-    client.query("SELECT user_name, is_faculty, user_id FROM user_list ORDER BY is_faculty DESC, user_name");
-  res.json(dbres.rows);
+  try {
+    const dbres = await
+      client.query("SELECT user_name, is_faculty, user_id FROM user_list ORDER BY is_faculty DESC, user_name");
+    res.json(dbres.rows);
+
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
 });
 
 export default router;

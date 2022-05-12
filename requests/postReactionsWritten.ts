@@ -10,19 +10,14 @@ const router = express.Router();
 
 router.post("/reaction", async (req, res) => {
   try {
-    const insertReaction = "INSERT INTO reaction (resource_id, user_id, polarity) VALUES	($1, $2, $3) returning *"
+    const insertReaction = "INSERT INTO reaction VALUES	(default, $1, $2, $3) returning *"
     const { resource_id, user_id, polarity } = req.body
-    console.log('req.body', req.body);
-    console.log('resource_id', resource_id);
-    console.log('user_id', user_id);
-    console.log('polarity', polarity);
     const addNewReaction = await client.query(
       insertReaction, [resource_id, user_id, polarity]
     );
     res.json(addNewReaction.rows)
   } catch (error) {
-    console.error();
-    res.sendStatus(500);
+    res.status(500).json(error.message);
   }
 });
 

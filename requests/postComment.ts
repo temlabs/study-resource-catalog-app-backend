@@ -33,7 +33,7 @@ router.post<{}, {}, CommentPost>("/comments", async (req, res) => {
             res.status(500).json("A resource id or user id was not present in the database");
             return;
         }
-        res.sendStatus(500);
+        res.status(500).json(error.message);
         return;
     }
 });

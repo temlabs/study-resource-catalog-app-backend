@@ -12,15 +12,12 @@ router.get("/reaction/:resource_id", async (req, res) => {
   try {
     const getReaction = "SELECT reaction.resource_id, SUM(reaction.polarity) FROM reaction WHERE reaction.resource_id = ($1) GROUP BY reaction.resource_id"
     const { resource_id } = req.params
-    console.log('req.body', req.params);
-    console.log('resource_id', resource_id);
     const returnReaction = await client.query(
       getReaction, [resource_id]
     );
     res.json(returnReaction.rows)
   } catch (error) {
-    console.error();
-    res.sendStatus(500);
+    res.status(500).json(error.message);
   }
 });
 

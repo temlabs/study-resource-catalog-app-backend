@@ -2,9 +2,8 @@ import express from "express";
 import { Client } from "pg";
 import { config } from "dotenv";
 import cors from "cors";
+
 config();
-
-
 
 const herokuSSLSetting = { rejectUnauthorized: false }
 const sslSetting = process.env.LOCAL ? false : herokuSSLSetting

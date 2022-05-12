@@ -11,6 +11,7 @@ const dbConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: sslSetting,
 };
+
 const app = express();
 const router= express.Router();
 app.use(express.json()); //add body parser to each following route handler

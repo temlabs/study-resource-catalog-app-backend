@@ -1,24 +1,8 @@
-import express from "express";
+import { client } from "./../server";
 import { Client } from "pg";
-import { config } from "dotenv";
-import cors from "cors";
-
-config();
-
-const herokuSSLSetting = { rejectUnauthorized: false }
-const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
-const dbConfig = {
-  connectionString: process.env.DATABASE_URL,
-  ssl: sslSetting,
-};
-
-const app = express();
-const router= express.Router();
-const client = new Client(dbConfig);
-client.connect();
-
-app.use(express.json()); //add body parser to each following route handler
-app.use(cors()) //add CORS support to each following route handler
+client as Client
+import express from "express";
+const router = express.Router();
 
 //Get all resources listed in the table
 router.get("/resources",  async function (req, res) {

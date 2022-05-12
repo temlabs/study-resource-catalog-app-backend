@@ -13,7 +13,7 @@ import getStudyList from './requests/getStudyList';
  import getReactions from './requests/getReactions';
  import getUsers from './requests/getUsers'
 //import postComment from "./requests/postComment";
-// import postReactionsWritten from './requests/postReactionsWritten'
+import postReactionsWritten from './requests/postReactionsWritten'
 // import postResource from './requests/postResource'
 // import postStudyList from './requests/postStudyList'
 
@@ -45,7 +45,7 @@ app.use('/', getContentType);
 app.use('/', getReactions);
 app.use('/', getUsers);
 // //app.use('/', postComment);
-// app.use('/', postReactionsWritten);
+app.use('/', postReactionsWritten);
 // app.use('/', postResource);
 // app.use('/', postStudyList);
 

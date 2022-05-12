@@ -3,6 +3,8 @@ import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 
+config();
+
 const herokuSSLSetting = { rejectUnauthorized: false }
 const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
 const dbConfig = {
@@ -10,6 +12,7 @@ const dbConfig = {
   ssl: sslSetting,
 };
 const app = express();
+const router= express.Router();
 app.use(express.json()); 
 app.use(cors()) 
 const client = new Client(dbConfig);
@@ -19,7 +22,7 @@ client.connect();
 
 //this defines the SQL query inside a POST HTTP request
 
-app.post("/reaction", async (req, res) => {
+router.post("/reaction", async (req, res) => {
     try {
       const insertReaction = "INSERT INTO reaction (resource_id, user_id, polarity) VALUES	($1, $2, $3) returning *"
       const {resource_id, user_id, polarity} = req.body
@@ -37,4 +40,4 @@ app.post("/reaction", async (req, res) => {
     }
   });
 
-  
+  export default router; 

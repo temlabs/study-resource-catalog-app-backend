@@ -3,13 +3,19 @@ import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 
+config();
+
 const herokuSSLSetting = { rejectUnauthorized: false }
 const sslSetting = process.env.LOCAL ? false : herokuSSLSetting
 const dbConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: sslSetting,
 };
+
+
 const app = express();
+const router= express.Router();
+
 app.use(express.json()); //add body parser to each following route handler
 app.use(cors()) //add CORS support to each following route handler
 const client = new Client(dbConfig);
@@ -19,7 +25,7 @@ client.connect();
 
 //this defines the SQL query inside a GET HTTP request
 
-app.get("reaction/:resource_id", async (req, res) => {
+router.get("/reaction/:resource_id", async (req, res) => {
   try {
     const getReaction = "SELECT reaction.resource_id, SUM(reaction.polarity) FROM reaction WHERE reaction.resource_id = ($1) GROUP BY reaction.resource_id"
     const {resource_id} = req.params
@@ -35,5 +41,5 @@ app.get("reaction/:resource_id", async (req, res) => {
   }
 });
 
-
+export default router;
     

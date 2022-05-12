@@ -5,8 +5,8 @@ import cors from "cors";
 import filePath from "./src/filePath";
 
 //trying to run the get endpoints with them being a seprate file
-//import getResource from './requests/getResource';
-//const getStudyList = require('./requests/getStudyList')
+import getResource from './requests/getResource';
+import getStudyList from './requests/getStudyList'
 
 
 config(); //Read .env file lines as though they were env vars.
@@ -26,9 +26,10 @@ const dbConfig = {
 
 const app = express();
 
+
 //trying to import endpoints 
-//app.use(getResource);
-//app.use('/', getStudyList);
+app.use('/',getResource);
+app.use('/', getStudyList);
 
 app.use(express.json()); //add body parser to each following route handler
 app.use(cors()) //add CORS support to each following route handler
@@ -36,6 +37,7 @@ app.use(cors()) //add CORS support to each following route handler
 const client = new Client(dbConfig);
 client.connect();
 
+//getResource(app,client);
 app.get("/", async (req, res) => {
   const pathToFile = filePath("../public/index.html");
   res.sendFile(pathToFile);

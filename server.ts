@@ -3,10 +3,13 @@ import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
 import filePath from "./src/filePath";
-
-//trying to run the get endpoints with them being a seprate file
+//trying to run the get endpoints with them being a separate file
 import getResource from './requests/getResource';
 import getStudyList from './requests/getStudyList'
+import { Comment } from './requests/GetComments';
+import { CommentPost } from "./requests/GetComments";
+import getComments from './requests/GetComments';
+import postComment from './requests/PostComment';
 
 
 config(); //Read .env file lines as though they were env vars.
@@ -23,7 +26,6 @@ const dbConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: sslSetting,
 };
-
 const app = express();
 
 
@@ -42,6 +44,50 @@ app.get("/", async (req, res) => {
   const pathToFile = filePath("../public/index.html");
   res.sendFile(pathToFile);
 });
+
+
+app.get<{ resourceId: number }, {}, {}>("/comments/:resourceId", async (req, res) => {
+  const resourceId = req.params.resourceId;
+  if (!resourceId) {
+    res.sendStatus(400)
+    return;
+  }
+
+  try {
+    const comments: Comment[] = await getComments(client, resourceId);
+    if (comments.length == 0) {
+      res.sendStatus(404);
+      return;
+    }
+    res.status(200).json(comments);
+
+  } catch (error) {
+    res.sendStatus(500);
+    return;
+  }
+});
+
+app.post<{}, {}, CommentPost>("/comments", async (req, res) => {
+  const { resource_id, comment_text, user_id }: { resource_id: number, comment_text: string, user_id: number } = req.body
+  const commentIsEmpty = comment_text === "";
+  if (commentIsEmpty || !resource_id || !user_id || !comment_text) {
+    res.sendStatus(400)
+    return;
+  }
+
+  try {
+    const postedComment: Comment[] = await postComment(client, comment_text, resource_id, user_id);
+    res.status(201).json(postedComment);
+  } catch (error) {
+    if ((error.detail as string).includes("not present")) {
+      res.status(500).json("A resource id or user id was not present in the database");
+      return;
+    }
+    res.sendStatus(500);
+    return;
+  }
+});
+
 
 
 //Start the server on the given port

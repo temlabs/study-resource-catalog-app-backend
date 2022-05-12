@@ -1,5 +1,5 @@
 import { Client } from "pg";
-import { Comment } from "./GetComments";
+import { Comment } from "./getComments";
 
 export default async function postComment(client: Client, comment_text: string, resource_id: number, user_id: number): Promise<Comment[]> {
     const insertCommentQuery = 'INSERT INTO comment_list VALUES(DEFAULT, $1, $2, $3 ) returning *';

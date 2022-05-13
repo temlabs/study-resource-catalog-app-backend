@@ -2,6 +2,23 @@ import { Client } from "pg";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
+import filePath from "./src/filePath";
+
+
+//trying to run the get endpoints with them being a separate file
+import getResource from './requests/getResource';
+import getStudyList from './requests/getStudyList';
+import getComments from './requests/getComments';
+import getContentType from './requests/getContentType';
+import getReactions from './requests/getReactions';
+import getUsers from './requests/getUsers'
+import postComment from "./requests/postComment";
+import postReactionsWritten from './requests/postReactionsWritten'
+import postResource from './requests/postResource'
+import postStudyList from './requests/postStudyList'
+
+
+
 
 config(); //Read .env file lines as though they were env vars.
 
@@ -17,18 +34,38 @@ const dbConfig = {
   connectionString: process.env.DATABASE_URL,
   ssl: sslSetting,
 };
-
 const app = express();
+
+export const client = new Client(dbConfig);
+client.connect();
 
 app.use(express.json()); //add body parser to each following route handler
 app.use(cors()) //add CORS support to each following route handler
 
-const client = new Client(dbConfig);
-client.connect();
 
+//trying to import endpoints 
+app.use('/', getResource);
+app.use('/', getStudyList);
+app.use('/', getComments);
+app.use('/', getContentType);
+app.use('/', getReactions);
+app.use('/', getUsers);
+app.use('/', postComment);
+app.use('/', postReactionsWritten);
+app.use('/', postResource);
+app.use('/', postStudyList);
+
+
+
+
+
+
+
+
+//getResource(app,client);
 app.get("/", async (req, res) => {
-  const dbres = await client.query('select * from categories');
-  res.json(dbres.rows);
+  const pathToFile = filePath("../public/index.html");
+  res.sendFile(pathToFile);
 });
 
 

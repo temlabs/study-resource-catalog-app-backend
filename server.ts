@@ -2,7 +2,7 @@ import { Client } from "pg";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import filePath from "./src/filePath";
+import filePath from "./filePath";
 
 
 //trying to run the get endpoints with them being a separate file

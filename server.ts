@@ -2,7 +2,7 @@ import { Client } from "pg";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import filePath from "./src/filePath";
+import filePath from "./filePath";
 
 
 //trying to run the get endpoints with them being a separate file
@@ -12,6 +12,7 @@ import getComments from './requests/getComments';
 import getContentType from './requests/getContentType';
 import getReactions from './requests/getReactions';
 import getUsers from './requests/getUsers'
+import getTags from './requests/getTags'
 import postComment from "./requests/postComment";
 import postReactionsWritten from './requests/postReactionsWritten'
 import postResource from './requests/postResource'
@@ -52,6 +53,7 @@ app.use('/', getComments);
 app.use('/', getContentType);
 app.use('/', getReactions);
 app.use('/', getUsers);
+app.use('/', getTags);
 app.use('/', postComment);
 app.use('/', postReactionsWritten);
 app.use('/', postResource);

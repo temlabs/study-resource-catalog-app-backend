@@ -16,6 +16,8 @@ import postComment from "./requests/postComment";
 import postReactionsWritten from './requests/postReactionsWritten'
 import postResource from './requests/postResource'
 import postStudyList from './requests/postStudyList'
+import deleteStudyList from './requests/deleteStudyList'
+import getItemFromStudyList from './requests/getItemFromStudyList'
 
 
 
@@ -54,7 +56,8 @@ app.use('/', postComment);
 app.use('/', postReactionsWritten);
 app.use('/', postResource);
 app.use('/', postStudyList);
-
+app.use('/', deleteStudyList);
+app.use('/', getItemFromStudyList);
 
 
 

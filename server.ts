@@ -69,7 +69,7 @@ app.use('/', getItemFromStudyList);
 
 //getResource(app,client);
 app.get("/", async (req, res) => {
-  const pathToFile = filePath("../public/index.html");
+  const pathToFile = filePath("./public/index.html");
   res.sendFile(pathToFile);
 });
 

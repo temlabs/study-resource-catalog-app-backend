@@ -25,8 +25,11 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
     res.status(200).json(createdResource.rows)
 
     // discord test
+
+    //setting the webhook address 
     const webhook = "https://discord.com/api/webhooks/975679258213105734/PxV1iOASTM1h7Lw52OL8_xbqT4OeIvy_ilqCSw39hd4mnn2bbR11SG9dKw3Wz9bEFKLx"
 
+    //sending post request to webhook for the new resource to be posted in discord
     axios.post(webhook, 
       {
         
@@ -37,7 +40,7 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
             {
               "author": {
                 "name": author_name,
-                "url": "https://gist.github.com/Birdie0/78ee79402a4301b1faf412ab5f1cdcf9",
+                //"url": "https://gist.github.com/Birdie0/78ee79402a4301b1faf412ab5f1cdcf9",
                 "icon_url": null
               },
               "title": resource_name,
@@ -81,14 +84,14 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
           ]
         }
       
-      )
+      )//error handling for post request for axios
       .then(function (response) {
         //console.log(response);
       })
       .catch(function (error) {
         //console.log(error);
       });
-
+      //error handling 
   } catch (err) {
     console.log(`error:${err.message}`)
     res.status(500).json(err.message);

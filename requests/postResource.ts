@@ -1,3 +1,4 @@
+import axios from "axios"
 import { client } from "./../server";
 import { Client } from "pg";
 client as Client
@@ -23,6 +24,74 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
 
     res.status(200).json(createdResource.rows)
 
+    // discord test
+
+    //setting the webhook address 
+    const webhook = "https://discord.com/api/webhooks/975679258213105734/PxV1iOASTM1h7Lw52OL8_xbqT4OeIvy_ilqCSw39hd4mnn2bbR11SG9dKw3Wz9bEFKLx"
+
+    //sending post request to webhook for the new resource to be posted in discord
+    axios.post(webhook, 
+      {
+        
+          "username": "New Resource",
+          "avatar_url": "https://cdn.pixabay.com/photo/2016/09/12/09/51/abc-1663383_960_720.png",
+          "content": "New Content Alert!!!!",
+          "embeds": [
+            {
+              "author": {
+                "name": author_name,
+                //"url": "https://gist.github.com/Birdie0/78ee79402a4301b1faf412ab5f1cdcf9",
+                "icon_url": null
+              },
+              "title": resource_name,
+              "url": `https://${url}`,
+              "description": description,
+              "color": 15258703,
+              "fields": [
+                {
+                  "name": "Content Type",
+                  "value": content_name,
+                  "inline": true
+                },
+                {
+                  "name": "Build Stage",
+                  "value": build_stage,
+                  "inline": false
+                },
+                {
+                  "name": "Recommendation Nature",
+                  "value": recommendation_nature,
+                  "inline": false
+                },
+                {
+                  "name": "Recommendation Reason",
+                  "value": recommendation_reason,
+                  "inline": false
+                }
+                
+              ],
+              "thumbnail": {
+                "url": null
+              },
+              "image": {
+                "url": null
+              },
+              "footer": {
+                "text":null,
+                "icon_url": null
+              }
+            }
+          ]
+        }
+      
+      )//error handling for post request for axios
+      .then(function (response) {
+        //console.log(response);
+      })
+      .catch(function (error) {
+        //console.log(error);
+      });
+      //error handling 
   } catch (err) {
     console.log(`error:${err.message}`)
     res.status(500).json(err.message);

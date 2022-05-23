@@ -1,6 +1,4 @@
 --This SQL query takes the resource table and joins tags & reactions to complete the data 
---INSTRUCTIONS: un-comment line 3 to remove existing view
---un-comment lines 5 & 55
 --drop view resource_main;
 --Create or replace view resource_main as (
 SELECT 
@@ -13,7 +11,7 @@ SELECT
     , resource.url
     , con.content_name
     , resource.description
-    , resource.post_date
+    , CAST(resource.post_date AS DATE) AS post_date
     , resource.build_stage
     , resource.recommendation_nature
     , resource.recommendation_reason
@@ -51,5 +49,15 @@ LEFT JOIN
       	FROM comment_list LEFT JOIN user_list ON comment_list.user_id = user_list.user_id
         GROUP BY comment_list.resource_id         ORDER BY comment_list.resource_id
     ) com ON resource.resource_id = com.resource_id
-ORDER BY resource.resource_id
+ORDER BY CAST(resource.post_date AS DATE) DESC
 --)
+
+
+
+
+
+
+
+
+
+

@@ -25,11 +25,8 @@ router.post<{}, {}, ResourcePost>("/resource", async (req, res) => {
 
     res.status(200).json(createdResource.rows)
 
-    // discord test
-
-    //setting the webhook address 
-    //const webhook = "https://discord.com/api/webhooks/975679258213105734/PxV1iOASTM1h7Lw52OL8_xbqT4OeIvy_ilqCSw39hd4mnn2bbR11SG9dKw3Wz9bEFKLx"
-
+    // discord test 
+    
     //sending post request to webhook for the new resource to be posted in discord
     axios.post(webhook, 
       {

@@ -4,4 +4,4 @@ dist
 .env.heroku
 .vscode/last.sql
 .vscode/settings.json
-.request/utils/webhookURL.ts
+.requests/utils/webhookURL.ts

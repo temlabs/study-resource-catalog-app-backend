@@ -2,7 +2,7 @@ import { Client } from "pg";
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
-import filePath from "./src/filePath";
+import filePath from "./filePath";
 
 
 //trying to run the get endpoints with them being a separate file
@@ -17,6 +17,8 @@ import postComment from "./requests/postComment";
 import postReactionsWritten from './requests/postReactionsWritten'
 import postResource from './requests/postResource'
 import postStudyList from './requests/postStudyList'
+import deleteStudyList from './requests/deleteStudyList'
+import getItemFromStudyList from './requests/getItemFromStudyList'
 
 
 
@@ -56,16 +58,17 @@ app.use('/', postComment);
 app.use('/', postReactionsWritten);
 app.use('/', postResource);
 app.use('/', postStudyList);
+app.use('/', deleteStudyList);
+app.use('/', getItemFromStudyList);
 
-
-
+//testing discord webhooks 
 
 
 
 
 //getResource(app,client);
 app.get("/", async (req, res) => {
-  const pathToFile = filePath("../public/index.html");
+  const pathToFile = filePath("./public/index.html");
   res.sendFile(pathToFile);
 });
 

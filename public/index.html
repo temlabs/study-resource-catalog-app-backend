@@ -25,8 +25,10 @@
                 <p><code>GET /reactions </code></p>
                 <li>Gets all content-types</li>
                 <p><code>GET /content-types </code></p>
-                <li>*Gets all study tips for a specific users</li>
-                <p><code>GET /study-list/:user_id </code></p>
+                <li>Gets all study list for a specific users</li>
+                <p><code>GET /study-list/:id </code></p>
+                <li>Gets an item from the study list for a specific users</li>
+                <p><code>GET /study-list/:user_id/:resource_id </code></p>
             </ul>
             </section>       
         </section>
@@ -36,16 +38,24 @@
                 <ul>
                 <li>Adds resource to a database</li>
                 <p><code>POST /resources </code></p>
-                <li>*Post comments for a particular resource</li>
+                <li>Post comments for a particular resource</li>
                 <p><code>POST /comments </code></p>
-                <li>*Post a reaction for a given resource</li>
+                <li>Post a reaction for a given resource</li>
                 <p><code>POST /reactions/:resource_id</code></p>
-                <li>*Post a reactions for a given resource</li>
+                <li>Post a reactions for a given resource</li>
                 <p><code>POST /reactions/:resource_id </code></p>
-                <li>*Post a resource to study list for a specific users</li>
-                <p><code>GET /study-list </code></p>
+                <li>Post a resource to study list for a specific users</li>
+                <p><code>POST /study-list </code></p>
             </ul>
-            </section>       
+            </section>
+            <section>
+                <h3><strong>Delete Requests</strong></h3>
+                <section>
+                    <ul>
+                    <li>deletes a resource from a users study list</li>
+                    <p><code>DELETE /study-list/:user_id/:resource_id </code></p>
+                </ul>
+                </section>           
         </section>
     </main>
 </body>

@@ -6,11 +6,13 @@
   "scripts": {
     "start": "node dist/server.js",
     "start:dev": "ts-node server.ts",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "build": "tsc"
   },
   "author": "your name here",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

@@ -7,7 +7,7 @@ const router = express.Router();
 //Get all resources listed in the table
 router.get("/resources",  async function (req, res) {
     try{
-        const query = `SELECT * FROM resource_main ORDER BY post_date  DESC;`
+        const query = `SELECT * FROM resource_main;`
         const resources = await client.query(query);
         res.json(resources.rows);
         res.status(200)

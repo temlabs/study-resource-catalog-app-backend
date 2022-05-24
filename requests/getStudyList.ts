@@ -18,7 +18,7 @@ router.get<{ id: string }, {}, {}>("/study-list/:id", async (req, res) => {
 
         //checking to see if the result of the query is empty
         if (studyList.rowCount === 0) {
-            res.status(400).send("This user does not exisit or has no resources")
+            res.status(400).send("This user does not exist or has no resources")
         } else {
             res.status(201).send(studyList.rows)
         };

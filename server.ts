@@ -63,7 +63,6 @@ app.use('/', postStudyList);
 
 
 
-
 //getResource(app,client);
 app.get("/", async (req, res) => {
   const pathToFile = filePath("../public/index.html");
